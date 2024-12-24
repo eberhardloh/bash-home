@@ -1,0 +1,3 @@
+t3-get-id-from-bodytag () {
+curl ${1} 2>/dev/null | grep '<body' | sed -E 's~.*id="p([[:digit:]]+).*~\1~'
+}

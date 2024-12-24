@@ -1,0 +1,7 @@
+echo "PHP exif_read_data() ist deutlich schneller!"
+
+exifTouch() {
+  TOUCHDT="$(exif "${1}" -t 0x9003 | grep 'Value:' | sed -E 's/.*: //' | sed 's/:/-/' | sed 's/:/-/')"
+  sudo touch "${1}" -d "${TOUCHDT}"
+  echo "touch '${1}' -d '${TOUCHDT}'"
+}

@@ -1,0 +1,13 @@
+# ! -z ${SSH_TTY}
+if [ ${TERM} != "dumb" ]; then
+    bind -x '"\C-^": echo "stty sane" ; stty sane'
+    bind -x '"\el": clear; ls -la'
+fi
+
+# https://gist.github.com/copperlight/e9eaa40d6f3bb9e1e6e6b1dd8ba0a8d5
+# wsfl bash is not a login shell
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+export DISPLAY=:0.0

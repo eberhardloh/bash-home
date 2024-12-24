@@ -1,0 +1,6 @@
+crli () {
+  echo "$1"
+  nslookup "$1" 8.8.8.8 | grep -v 8.8.8.8
+  curl -sI http://$1/ | grep -Ei '^(http|location|x-redirect-by)'
+  curl -sI https://$1/ | grep -Ei '^(http|location|x-redirect-by)'
+}

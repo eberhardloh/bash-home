@@ -1,0 +1,10 @@
+API="https://dns.hetzner.com/api/v1/"
+HAT="Auth-API-Token: $(cat /etc/hetzner-dns-token)"
+
+hdnsGETzones() {
+  curl -X GET "${API}zones" -H ${HAT}
+}
+
+hdnsPUTrecordupdate() {
+  curl -X PUT https://dns.hetzner.com/api/v1/records/${1} -H 'Content-Type: application/json' -H ${HAT} -d '{"name":"${2}","type":"A","value":"${3}","ttl":300,"zone_id":"{ZoneID}"}'
+}

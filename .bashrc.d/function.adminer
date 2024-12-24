@@ -1,0 +1,12 @@
+adminer() {
+    ADMINER_SRC="$(curl https://www.adminer.org/de/ 2>/dev/null | grep -Eo 'https://github.com/vrana/adminer/releases/download/[^"]*-mysql-de.php')"
+    ADMINER_VER="$(echo "${ADMINER_SRC}" | sed -E 's/^.*\/v([.[:digit:]]+)\/.*/\1/')"
+
+    echo "${ADMINER_SRC}"
+
+    wget "${ADMINER_SRC}" -O adminer.php 2>/dev/null
+
+    echo "${ADMINER_VER}" > adminer.version
+
+    chown -c "$(stat -c '%U' .)" adminer*
+}

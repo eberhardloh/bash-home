@@ -1,0 +1,20 @@
+
+words-diff() {
+	if [ -z "$2" ]
+	then
+		echo "$0 'entferne diese Wörter' 'aus dieser Zeichenkette'"
+	else
+		read -a array1 <<< "$1"
+		read -a array2 <<< "$2"
+
+		result=()
+
+		for word in "${array2[@]}"; do
+			if [[ ! " ${array1[*]} " =~ " $word " ]]; then
+				result+=("$word")
+			fi
+		done
+
+		echo "${result[*]}"
+	fi
+}
